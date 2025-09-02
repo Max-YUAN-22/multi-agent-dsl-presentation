@@ -6,3 +6,19 @@ __pycache__/
 .DS_Store
 results/
 *.zip
+
+# keep figures for README
+!results/**/*.png
+!results/**/*.jpg
+!results/**/*.jpeg
+!results/**/*.gif
+
+# keep experiment artifacts for README
+!results/
+!results/**/
+!results/**/*.png
+!results/**/*.jpg
+!results/**/*.jpeg
+!results/**/*.gif
+# 如果也要提交 CSV，则取消下一行注释
+# !results/**/*.csv
