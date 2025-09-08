@@ -242,3 +242,10 @@ The following images showcase the performance of the system in two different sce
 -   **Presentation is ready**: Open the presentation with the charts and commentary.
 -   **Terminal is on standby**: Prepare a terminal window to quickly run the `send_events.py` script if needed.
 -   **Network connection**: Ensure a stable local network connection so that the WebSocket connection is not interrupted.
+
+## Web visualization of the project
+
+https://max-yuan-22.github.io/multi-agent-dsl-presentation/
+
+## Author and supervisor
+
