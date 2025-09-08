@@ -8,7 +8,7 @@ import threading, time, queue
 class Task:
     name: str
     prompt: str
-    agent: str
+    agent: Any
     priority: int = 0
     timeout: float = 10.0
     max_retries: int = 0
@@ -64,13 +64,17 @@ class CacheAwareScheduler:
     def _worker(self):
         while not self._stop.is_set():
             try:
-                (_, t) = self._q.get(timeout=0.1)
+                (key, t) = self._q.get(timeout=0.1)
             except queue.Empty:
                 continue
             try:
+                if t.name == "__stop__":
+                    # 收到停机标记，退出该 worker
+                    return
                 self._execute_task(t)
             finally:
                 self._q.task_done()
+
 
     def _execute_task(self, t: Task):
         cache_full_hit = False
@@ -85,9 +89,10 @@ class CacheAwareScheduler:
                 return
         out, ok = None, False
         attempts = 0
+        agent_role = t.agent.role if hasattr(t.agent, 'role') else t.agent
         while attempts <= t.max_retries and not ok:
             try:
-                out = self._llm(t.prompt, t.agent) if self._llm is not None else f"[LLM:{t.agent}] {t.prompt}"
+                out = self._llm(t.prompt, agent_role) if self._llm is not None else f"[LLM:{agent_role}] {t.prompt}"
                 if t.constraint is not None:
                     if hasattr(t.constraint, 'validate'):
                         ok = bool(t.constraint.validate(out))
@@ -106,7 +111,7 @@ class CacheAwareScheduler:
                     time.sleep((t.backoff_ms/1000.0) * (2**(attempts-1)))
         if not ok and t.fallback_prompt:
             try:
-                out = self._llm(t.fallback_prompt, t.agent) if self._llm else t.fallback_prompt
+                out = self._llm(t.fallback_prompt, agent_role) if self._llm else t.fallback_prompt
                 ok = True
             except Exception as e:
                 out = f"[error:{t.name}] {e}"
@@ -120,11 +125,15 @@ class CacheAwareScheduler:
             self._metrics.on_complete((time.time()-start_ts)*1000.0, cache_full_hit)
 
     def shutdown(self):
-        self._stop.set()
+        # 推送与 worker 数量相同的停机任务，使用唯一自增序号避免 PriorityQueue 比较 Task
         for _ in self._threads:
-            self._q.put(((0,0,0), Task(name="__stop__", prompt="", agent="_")))
+            self._seq += 1
+            stop_key = (-10**9, 0, self._seq)  # 极低优先级 + 递增序号
+            self._q.put((stop_key, Task(name="__stop__", prompt="", agent="_")))
+        # 等待线程收尾
         for th in self._threads:
             th.join(timeout=0.5)
+
 
     def run(self, cache, llm_callable: Callable[[str, Optional[str]], str], tasks: Optional[List[Task]]=None) -> Dict[str, Any]:
         self.configure(llm=llm_callable, cache=cache)

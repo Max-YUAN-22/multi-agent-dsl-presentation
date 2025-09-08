@@ -1,0 +1,16 @@
+{
+  "demo": "quick_city_rt",
+  "source": "SF311 + Open-Meteo (no key)",
+  "window": "10min",
+  "params": {
+    "minutes": 10,
+    "max_cases": 60
+  },
+  "finished_utc": "2024-05-01 12:00:00",
+  "result": {
+    "done": true,
+    "count": 60,
+    "rain": 0.0,
+    "pm25": 11.0
+  }
+}

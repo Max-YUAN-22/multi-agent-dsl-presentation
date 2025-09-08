@@ -1,0 +1,19 @@
+{
+  "demo": "ad_rt",
+  "source": "Overpass(OSM) + Open-Meteo (no key)",
+  "bbox": "SF (37.76,-122.46,37.80,-122.39)",
+  "params": {},
+  "finished_utc": "2025-09-07 17:27:37",
+  "result": {
+    "done": true,
+    "summary": {
+      "detect": "[Perception]OK:nt near way:906363107. Vehicles stopped.",
+      "control": "[TrafficManager]OK:Close way:906363107 temporarily",
+      "plan": "[Reroute]OK:Reroute around way:906363107",
+      "dispatch": "[EMS]OK:Dispatch tow to way:906363107"
+    },
+    "ways": 21152,
+    "p_collision": 0.01,
+    "rain": 0.0
+  }
+}

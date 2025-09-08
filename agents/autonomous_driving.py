@@ -1,36 +1,62 @@
 
-from core.dsl import DSL, program
+from dsl.dsl import *
+from agents.perception_agent import PerceptionAgent
+from agents.traffic_manager_agent import TrafficManagerAgent
+from agents.reroute_agent import RerouteAgent
+from agents.ems_agent import EMSAgent
+import random
 
-SYSTEM_PREFIX = (
-    "You are a traffic incident agent. Policies: minimal JSON.\n"
-    "Keys: kind, severity, edge, action.\n"
-)
+class AutonomousDriving:
+    def __init__(self, llm, seed=None, num_events=10):
+        self.llm = llm
+        self.seed = seed
+        self.num_events = num_events
+        self.perception_agent = PerceptionAgent(llm=self.llm)
+        self.traffic_manager_agent = TrafficManagerAgent(llm=self.llm)
+        self.reroute_agent = RerouteAgent(llm=self.llm)
+        self.ems_agent = EMSAgent(llm=self.llm)
+        self._setup_environment()
 
-def _mk_prompt(scene:str) -> str:
-    return SYSTEM_PREFIX + scene
+    def _setup_environment(self):
+        if self.seed is not None:
+            random.seed(self.seed)
 
-@program
-def driving_demo(dsl: DSL, *, ticks:int=50, p_collision:float=0.02, seed:int=7, llm_delay_ms:int=0, use_cache:bool=True):
-    import random
-    random.seed(seed)
-    import time
-    def _llm(p, role=None):
-        if llm_delay_ms>0:
-            time.sleep(llm_delay_ms/1000.0)
-        return f"[{role}]OK:{p[-16:]}"
-    dsl.use_llm(_llm, use_cache=use_cache)
-    dsl.register("Perception", ["detect_incident"])
-    dsl.register("TrafficManager", ["control"])
-    dsl.register("Reroute", ["plan"])
-    dsl.register("EMS", ["dispatch"])
+    def _generate_event(self):
+        # simplified event generation
+        return {"event": "traffic incident"}
 
-    for t in range(ticks):
-        if random.random() < p_collision:
-            edge = f"E{random.randint(1,5)}-{random.randint(1,5)}"
-            scene = f"Incident near {edge}. Vehicles stopped."
-            det = dsl.gen("detect", prompt=_mk_prompt(scene), agent="Perception", regex=r".*")
-            ctrl = dsl.delegate(det, "control", prompt=f"Close {edge} temporarily", agent="TrafficManager", regex=r".*")
-            plan = dsl.delegate(det, "plan", prompt=f"Reroute around {edge}", agent="Reroute", regex=r".*")
-            ems  = dsl.delegate(det, "dispatch", prompt=f"Dispatch tow to {edge}", agent="EMS", regex=r".*")
-            dsl.join([det, ctrl, plan, ems])
-    return {"done": True}
+    def run_simulation(self):
+        for i in range(self.num_events):
+            event = self._generate_event()
+            print(f"Cycle {i+1}/{self.num_events}: Processing event: {event}")
+            self.process_event(event)
+
+    def process_event(self, event):
+        perception_task = Task(
+            agent=self.perception_agent,
+            instruction="Analyze the event and identify the type of incident."
+        )
+        traffic_manager_task = Task(
+            agent=self.traffic_manager_agent,
+            instruction="Based on the incident type, determine the necessary actions."
+        )
+        reroute_task = Task(
+            agent=self.reroute_agent,
+            instruction="Suggest a new route to avoid the incident."
+        )
+        ems_task = Task(
+            agent=self.ems_agent,
+            instruction="If necessary, dispatch emergency services."
+        )
+
+        # Define the workflow for event processing
+        perception_task.set_downstream(traffic_manager_task)
+        traffic_manager_task.set_downstream(reroute_task)
+        traffic_manager_task.set_downstream(ems_task)
+
+        # Start the workflow
+        perception_task.run()
+
+def driving_demo(llm, seed=None):
+    simulation = AutonomousDriving(llm, seed)
+    simulation.run_simulation()

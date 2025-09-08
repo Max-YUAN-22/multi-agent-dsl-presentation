@@ -1,0 +1,38 @@
+{
+  "name": "autonomous-city-management",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^1.11.0",
+    "express": "^5.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^3.1.2",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "http-proxy-middleware": "^3.0.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "NODE_OPTIONS=--openssl-legacy-provider HOST=0.0.0.0 PORT=3003 react-scripts start",
+    "start:backend": "cd ../backend && uvicorn http_api:app --reload || echo 'Error starting backend service'",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent DSL Framework Presentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Multi-Agent DSL Framework: A New Paradigm for Complex Event Processing</h1>
+    </header>
+    <main>
+        <section id="slide-1">
+            <h2>Project Vision & Core Challenge</h2>
+            <p><strong>Vision:</strong> To create a highly efficient, scalable, and adaptive multi-agent system for real-time complex event processing.</p>
+            <p><strong>Challenge:</strong> Traditional systems struggle with dynamic, unpredictable events and lack a feedback loop for continuous adaptation.</p>
+        </section>
+        <section id="slide-2">
+            <h2>Our Solution: The Multi-Agent DSL Framework</h2>
+            <p>A specialized DSL that orchestrates multiple intelligent agents to collaboratively handle complex scenarios.</p>
+            <ul>
+                <li><strong>Declarative:</strong> Define "what" to do, not "how."</li>
+                <li><strong>Adaptive:</strong> Agents dynamically adjust to real-time events.</li>
+                <li><strong>Scalable:</strong> Built for high-throughput and low-latency.</li>
+            </ul>
+        </section>
+        <section id="slide-3">
+            <h2>System Architecture</h2>
+            <p>A modular, decoupled architecture ensuring scalability and maintainability.</p>
+            <img src="results/system_architecture.png" alt="System Architecture Diagram">
+        </section>
+        <section id="slide-4">
+            <h2>The DSL Primitives: Building Blocks of Intelligence</h2>
+            <p>Our DSL is built on a few key primitives that enable powerful, declarative workflows.</p>
+            <pre><code>
+# Example: Autonomous Driving Workflow
+workflow "autonomous_driving" {
+    monitor(event_source="traffic_camera")
+    detect(pattern="accident", confidence > 0.8)
+    dispatch(agent="safety_agent", action="secure_scene")
+    dispatch(agent="reroute_agent", action="plan_detour")
+    feedback(channel="system_metrics", data="latency, throughput")
+}
+            </code></pre>
+            <ul>
+                <li><strong>monitor:</strong> Ingests data streams from sources.</li>
+                <li><strong>detect:</strong> Identifies patterns using trained models or rules.</li>
+                <li><strong>dispatch:</strong> Assigns tasks to specialized agents.</li>
+                <li><strong>feedback:</strong> Closes the loop by sending results back to the system.</li>
+            </ul>
+        </section>
+        <section id="slide-5">
+            <h2>Live Demo</h2>
+            <p>Showcasing the system's real-time event processing capabilities.</p>
+            <p><em>(Here you would embed or link to the live demo)</em></p>
+        </section>
+        <section id="slide-6">
+            <h2>Use Case 1: Smart City - Performance Analysis</h2>
+            <p>Optimizing urban services through intelligent event processing.</p>
+            <div class="chart-container">
+                <figure>
+                    <img src="results/demo_city/cache_hit_ma.png" alt="Cache Hit Rate (Smart City)">
+                    <figcaption>Cache Hit Rate: Demonstrates the effectiveness of our caching strategy.</figcaption>
+                </figure>
+                <figure>
+                    <img src="results/demo_city/latency_hist.png" alt="Latency Distribution (Smart City)">
+                    <figcaption>Latency: Sub-second processing times for critical events.</figcaption>
+                </figure>
+            </div>
+        </section>
+        <section id="slide-7">
+            <h2>Use Case 2: Autonomous Driving - Decision Efficiency</h2>
+            <p>Enhancing safety and efficiency in autonomous vehicle coordination.</p>
+            <div class="chart-container">
+                <figure>
+                    <img src="results/demo_ad/event_type_share.png" alt="Event Type Share (AD)">
+                    <figcaption>Event Distribution: Shows the variety of events our system handles.</figcaption>
+                </figure>
+                <figure>
+                    <img src="results/demo_ad/clearance_reroute_cdf.png" alt="Clearance vs. Reroute Time (AD)">
+                    <figcaption>Decision Time: Rapid decision-making for rerouting and clearance.</figcaption>
+                </figure>
+            </div>
+        </section>
+        <section id="slide-8">
+            <h2>Summary & Future Work</h2>
+            <p><strong>Summary:</strong> Our framework provides a robust solution for complex event processing, validated in two demanding use cases.</p>
+            <p><strong>Future Work:</strong></p>
+            <ul>
+                <li>Expand the DSL with more advanced primitives.</li>
+                <li>Integrate with more data sources and agent types.</li>
+                <li>Develop a more advanced UI for workflow creation and monitoring.</li>
+            </ul>
+        </section>
+        <section id="slide-9">
+            <h2>Q&A</h2>
+            <p>Thank you for your attention. Any questions?</p>
+        </section>
+    </main>
+    <footer>
+        <p>Multi-Agent DSL Framework Presentation</p>
+    </footer>
+</body>
+</html>

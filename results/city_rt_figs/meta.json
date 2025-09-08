@@ -1,0 +1,17 @@
+{
+  "demo": "city_rt",
+  "source": "SF311 + Open-Meteo (no key)",
+  "window": "60min",
+  "city": "San Francisco (37.7749,-122.4194)",
+  "params": {
+    "minutes": 60,
+    "max_cases": 200
+  },
+  "finished_utc": "2025-09-07 17:27:30",
+  "result": {
+    "done": true,
+    "count": 200,
+    "rain": 0.0,
+    "pm25": 11.0
+  }
+}

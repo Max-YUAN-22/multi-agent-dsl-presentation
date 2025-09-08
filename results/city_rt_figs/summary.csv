@@ -1,0 +1,2 @@
+task_started,task_completed,cache_hit_rate,avg_latency_ms
+400,400,0.35,0.008205175399780273

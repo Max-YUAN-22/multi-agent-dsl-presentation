@@ -1,0 +1,11 @@
+{
+  "events_csv": "results/quick_demo/events.csv",
+  "outdir": "results/quick_demo",
+  "figures": [
+    "results/quick_demo/throughput.png",
+    "results/quick_demo/latency_hist.png",
+    "results/quick_demo/cache_hit_ma.png"
+  ],
+  "ma_window": 45,
+  "n_events": 3
+}

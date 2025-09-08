@@ -1,0 +1,12 @@
+{
+  "n": 0,
+  "lat_mean": NaN,
+  "lat_median": NaN,
+  "lat_p95": NaN,
+  "hit_rate": NaN,
+  "window": "last 20min (auto-widened)",
+  "source": "311(open) + Open-Meteo (auto widen & NYC fallback)",
+  "city_or_bbox": "Auto(SF\u2192NYC)",
+  "ma_window": 45,
+  "plotted_utc": "2025-09-02 16:23 UTC"
+}

@@ -1,0 +1,2 @@
+timestamp,road,event_type,severity,vehicles,lanes_blocked,agent_latency_ms,cache_hit,clearance_time_s,reroute_delay_s,is_congested
+2023-10-27T10:00:00Z,I-280,accident,3,2,1,120.5,0,900.0,120.0,1

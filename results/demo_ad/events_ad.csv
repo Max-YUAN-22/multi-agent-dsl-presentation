@@ -1,0 +1,5 @@
+timestamp,road,event_type,severity,vehicles,lanes_blocked,agent_latency_ms,cache_hit,clearance_time_s,reroute_delay_s,is_congested
+2025-09-07T19:28:09.810685+00:00,E2-1,near_miss,1,2,0,75.0,0,40.7,25.6,0
+2025-09-07T19:40:04.810685+00:00,E1-5,road_obstruction,2,1,1,340.5,0,822.3,64.7,0
+2025-09-07T19:41:04.805263+00:00,E5-2,stalled_vehicle,3,1,1,220.9,1,423.3,42.0,0
+2025-09-07T19:44:09.805263+00:00,E4-3,road_closure,4,0,3,536.8,0,2289.2,249.3,0

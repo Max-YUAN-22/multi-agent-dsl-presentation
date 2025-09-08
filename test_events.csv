@@ -1,0 +1,2 @@
+event_type,payload,title
+autonomous_driving,"{""speed"": 60, ""status"": ""driving""}","Autonomous Driving Event"

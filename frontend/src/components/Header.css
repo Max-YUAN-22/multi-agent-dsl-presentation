@@ -1,0 +1,18 @@
+/* frontend/src/components/Header.css */
+.page__header {
+  text-align: center;
+  padding: 48px 24px 16px;
+}
+
+.page__header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.subtitle {
+  margin: 12px 0 0;
+  color: #a0aec0;
+  font-size: 16px;
+}
