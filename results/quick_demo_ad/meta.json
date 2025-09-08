@@ -1,0 +1,8 @@
+{
+  "title": "Autonomous Driving (Quick RT)",
+  "source": "OSM Overpass + Open-Meteo",
+  "window": "last 20 min",
+  "city": "",
+  "bbox": "37.76,-122.46,37.80,-122.39",
+  "plotted": "2025-09-02 15:19 UTC"
+}

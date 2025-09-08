@@ -1,0 +1,15 @@
+timestamp,category,location,latency_ms,cache_hit
+2025-09-07T19:17:38.067535+00:00,blocked_driveway,Mission,396.8,0
+2025-09-07T19:18:00.067535+00:00,trash_pickup,Mission,196.4,0
+2025-09-07T19:19:35.067535+00:00,illegal_dumping,Marina,338.4,0
+2025-09-07T19:21:48.067535+00:00,street_cleaning,Richmond,185.0,0
+2025-09-07T19:27:18.067535+00:00,trash_pickup,Mission,160.4,0
+2025-09-07T19:27:43.067535+00:00,blocked_driveway,SOMA,303.3,0
+2025-09-07T19:28:30.067535+00:00,trash_pickup,SOMA,123.5,1
+2025-09-07T19:29:11.067535+00:00,street_cleaning,Chinatown,220.6,1
+2025-09-07T19:29:24.067535+00:00,blocked_driveway,Mission,239.6,0
+2025-09-07T19:35:42.067535+00:00,illegal_dumping,Castro,299.1,1
+2025-09-07T19:42:21.067535+00:00,street_cleaning,Noe Valley,179.7,0
+2025-09-07T19:42:25.067535+00:00,street_cleaning,Castro,157.8,0
+2025-09-07T19:43:39.067535+00:00,trash_pickup,Mission,147.7,1
+2025-09-07T19:45:00.067535+00:00,encampment,Bernal Heights,276.4,0

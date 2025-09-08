@@ -1,0 +1,2 @@
+scenario,use_cache,ticks,seed,count,t_first_ns,t_last_ns,sum_latency_ms,p50_ms,p95_ms,p99_ms,throughput_eps,hit_rate
+city,True,300,7,32,4276126250,6956813291,0.0,160.729375,178.2845,182.535417,11.937238293979576,0.0

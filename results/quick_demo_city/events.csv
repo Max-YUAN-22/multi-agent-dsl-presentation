@@ -1,0 +1,4 @@
+timestamp,category,location,latency_ms,cache_hit,severity,is_congested
+2025-09-02T16:07:15.974377+00:00,blocked_driveway,Bernal Heights,334.2,0,2,0
+2025-09-02T16:08:30.974377+00:00,abandoned_vehicle,Richmond,446.1,0,3,1
+2025-09-02T16:29:22.974377+00:00,street_cleaning,Mission,165.5,1,3,0

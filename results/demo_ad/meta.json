@@ -1,0 +1,27 @@
+{
+  "events_csv": "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/events_ad.csv",
+  "outdir": "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad",
+  "figures": [
+    "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/throughput.png",
+    "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/latency_hist.png",
+    "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/cache_hit_ma.png",
+    "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/event_type_share.png",
+    "/Users/Apple/Desktop/multi-agent-dsl-final/results/demo_ad/clearance_reroute_cdf.png"
+  ],
+  "ma_window": 60,
+  "n_events": 4,
+  "columns": [
+    "timestamp",
+    "road",
+    "event_type",
+    "severity",
+    "vehicles",
+    "lanes_blocked",
+    "agent_latency_ms",
+    "cache_hit",
+    "clearance_time_s",
+    "reroute_delay_s",
+    "is_congested",
+    "_time"
+  ]
+}
