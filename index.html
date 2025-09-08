@@ -21,26 +21,26 @@
             <section id="overview">
                 <h2>Project Overview</h2>
                 <p>
-                    随着大语言模型（LLMs）在 多智能体系统 中的广泛应用，任务often需要多轮推理、结构化输出以及智能体间的协同决策。然而，现有框架普遍缺乏一套能够显式支持 任务分解、智能体通信与运行时优化 的领域特定语言（DSL）。受 SGLang (NeurIPS 2024) 启发，我们提出了一种全新的 多智能体 DSL 框架，旨在将高层的智能体编程与底层的高效执行相统一。
+                    With the widespread adoption of Large Language Models (LLMs) in multi-agent systems, tasks often require multi-round reasoning, structured outputs, and collaborative decision-making among agents. However, existing frameworks generally lack a Domain-Specific Language (DSL) that explicitly supports task decomposition, agent communication, and runtime optimization.
                 </p>
                 <p>
-                    本工作弥合了 面向智能体的编程语言 与 高效运行时执行 之间的鸿沟，为多智能体协作、结构化生成以及人工智能系统工程提供了一个可复现、可扩展的研究平台。
+                    Inspired by SGLang (NeurIPS 2024), we introduce a novel Multi-Agent DSL framework designed to unify high-level agent programming with efficient low-level execution. This work bridges the gap between agent-oriented programming and high-performance runtimes, offering a reproducible and extensible platform for research in multi-agent collaboration, structured generation, and AI systems engineering.
                 </p>
             </section>
 
             <section id="innovations">
                 <h2>Core Innovations</h2>
                 <ul class="innovations-list">
-                    <li><strong>DSL 扩展:</strong> 支持 <code>spawn</code>, <code>route</code>, <code>gather</code>, <code>with_sla</code>, <code>contract</code>, <code>blackboard</code>, <code>on</code>, <code>emit</code> 等原语，显式建模任务分解、路由、约束与协作。</li>
-                    <li><strong>运行时优化:</strong>
+                    <li><strong>Extended DSL Primitives:</strong> We introduce primitives like <code>spawn</code>, <code>route</code>, <code>gather</code>, <code>with_sla</code>, <code>contract</code>, <code>blackboard</code>, <code>on</code>, and <code>emit</code> to explicitly model task decomposition, routing, constraints, and collaboration. (DSL原语：扩展了spawn, route等原语，用于任务分解、路由和协作)</li>
+                    <li><strong>Runtime Optimizations (运行时优化):</strong>
                         <ul>
-                            <li><strong>RadixTrie 前缀缓存:</strong> 跨任务前缀复用，大幅降低重复推理。</li>
-                            <li><strong>Cache-aware 调度:</strong> 长前缀优先，提升吞吐与响应速度。</li>
+                            <li><strong>RadixTrie Prefix Caching:</strong> Reduces redundant computations by reusing common prefixes across different tasks. (RadixTrie前缀缓存：复用任务前缀，减少重复推理)</li>
+                            <li><strong>Cache-Aware Scheduling:</strong> Prioritizes tasks with longer prefixes to improve throughput and response time. (缓存感知调度：长前缀优先，提升吞吐与响应)</li>
                         </ul>
                     </li>
-                    <li><strong>结构化约束:</strong> 支持 Regex / 轻量 cFSM 校验，保证输出符合格式要求。</li>
-                    <li><strong>事件驱动:</strong> 内置 EventBus，支持多智能体异步通信。</li>
-                    <li><strong>实验可复现:</strong> 集成 示例 / 实验 / 单元测试 / A/B 对比 / CLI 工具，零依赖即可运行。</li>
+                    <li><strong>Structured Output Generation:</strong> Supports Regex and lightweight cFSM validation to ensure outputs conform to the required format. (结构化输出：支持Regex/cFSM校验，保证输出格式)</li>
+                    <li><strong>Event-Driven Architecture:</strong> A built-in EventBus enables asynchronous communication and coordination among agents. (事件驱动：内置EventBus，支持多智能体异步通信)</li>
+                    <li><strong>Full-Stack Reproducibility:</strong> The framework is delivered with integrated examples, experiments, unit tests, A/B comparison tools, and a CLI for zero-dependency execution. (可复现性：集成示例、测试与命令行工具，零依赖运行)</li>
                 </ul>
             </section>
 
@@ -53,40 +53,52 @@
                     <li><strong>Scalable:</strong> Built for high-throughput and low-latency.</li>
                 </ul>
             </section>
+        </section>
         <section id="slide-3">
             <section id="system-architecture">
                 <h2>System Architecture</h2>
-                <p>A modular, decoupled architecture ensuring scalability and maintainability.</p>
-                <img src="results/ad_compare/system_architecture.png" alt="System Architecture Diagram" style="width:100%; max-width:800px;">
+                <p>Our framework features a modular, decoupled architecture that ensures scalability and maintainability, separating high-level logic from the execution runtime.</p>
+                <div class="architecture-container">
+                    <img src="results/system_architecture_final.svg" alt="System Architecture Diagram" style="width: 100%; max-width: 800px; margin: 0 auto;"/>
+                </div>
             </section>
+        </section>
         <section id="slide-4">
             <h2>The DSL Primitives: Building Blocks of Intelligence</h2>
             <p>Our DSL is built on a few key primitives that enable powerful, declarative workflows.</p>
-            <pre><code>
-# Example: Autonomous Driving Workflow
+            <pre><code># Example: Autonomous Driving Workflow
 workflow "autonomous_driving" {
     monitor(event_source="traffic_camera")
     detect(pattern="accident", confidence > 0.8)
     dispatch(agent="safety_agent", action="secure_scene")
     dispatch(agent="reroute_agent", action="plan_detour")
     feedback(channel="system_metrics", data="latency, throughput")
+<<<<<<< HEAD
 }
             </code></pre>
             <ul>
-                <li><strong>monitor:</strong> Ingests data streams from sources.</li>
-                <li><strong>detect:</strong> Identifies patterns using trained models or rules.</li>
-                <li><strong>dispatch:</strong> Assigns tasks to specialized agents.</li>
-                <li><strong>feedback:</strong> Closes the loop by sending results back to the system.</li>
+                <li><strong>monitor:</strong> Ingests data streams from various sources.</li>
+                <li><strong>detect:</strong> Identifies specific patterns using trained models or predefined rules.</li>
+                <li><strong>dispatch:</strong> Assigns tasks to specialized agents based on the context.</li>
+                <li><strong>feedback:</strong> Closes the loop by sending results and metrics back to the system for adaptation.</li>
             </ul>
         </section>
         <section id="slide-5">
             <h2>Live Demo</h2>
             <p>Showcasing the system's real-time event processing capabilities.</p>
+<<<<<<< HEAD
             <p><em>(Here you would embed or link to the live demo)</em></p>
         </section>
         <section id="slide-6">
             <h2>Use Case 1: Smart City - Performance Analysis</h2>
             <p>Optimizing urban services through intelligent event processing.</p>
+=======
+            <p><em>(A live demo would be embedded or linked here to demonstrate the framework in action.)</em></p>
+        </section>
+        <section id="slide-6">
+            <h2>Use Case 1: Smart City - Performance Analysis</h2>
+            <p>Optimizing urban services like 311 incident response through intelligent event processing.</p>
+>>>>>>> 991a3f2aa6b8740728fa6d7810245343aa0e47f8
             <div class="chart-container">
                 <figure>
                     <img src="results/demo_city/cache_hit_ma.png" alt="Cache Hit Rate (Smart City)">
@@ -94,12 +106,17 @@ workflow "autonomous_driving" {
                 </figure>
                 <figure>
                     <img src="results/demo_city/latency_hist.png" alt="Latency Distribution (Smart City)">
+<<<<<<< HEAD
                     <figcaption>Latency: Sub-second processing times for critical events.</figcaption>
+=======
+                    <figcaption>Latency: Achieves sub-second processing times for critical events.</figcaption>
+>>>>>>> 991a3f2aa6b8740728fa6d7810245343aa0e47f8
                 </figure>
             </div>
         </section>
         <section id="slide-7">
             <h2>Use Case 2: Autonomous Driving - Decision Efficiency</h2>
+<<<<<<< HEAD
             <p>Enhancing safety and efficiency in autonomous vehicle coordination.</p>
             <div class="chart-container">
                 <figure>
@@ -109,22 +126,46 @@ workflow "autonomous_driving" {
                 <figure>
                     <img src="results/demo_ad/clearance_reroute_cdf.png" alt="Clearance vs. Reroute Time (AD)">
                     <figcaption>Decision Time: Rapid decision-making for rerouting and clearance.</figcaption>
+=======
+            <p>Enhancing safety and traffic flow in autonomous vehicle coordination.</p>
+            <div class="chart-container">
+                <figure>
+                    <img src="results/demo_ad/event_type_share.png" alt="Event Type Share (AD)">
+                    <figcaption>Event Distribution: Shows the variety of complex events our system handles.</figcaption>
+                </figure>
+                <figure>
+                    <img src="results/demo_ad/clearance_reroute_cdf.png" alt="Clearance vs. Reroute Time (AD)">
+                    <figcaption>Decision Time: Enables rapid, critical decision-making for rerouting and scene clearance.</figcaption>
+>>>>>>> 991a3f2aa6b8740728fa6d7810245343aa0e47f8
                 </figure>
             </div>
         </section>
         <section id="slide-8">
             <h2>Summary & Future Work</h2>
+<<<<<<< HEAD
             <p><strong>Summary:</strong> Our framework provides a robust solution for complex event processing, validated in two demanding use cases.</p>
             <p><strong>Future Work:</strong></p>
             <ul>
                 <li>Expand the DSL with more advanced primitives.</li>
                 <li>Integrate with more data sources and agent types.</li>
                 <li>Develop a more advanced UI for workflow creation and monitoring.</li>
+=======
+            <p><strong>Summary:</strong> Our framework provides a robust and efficient solution for real-time, complex event processing, validated in two demanding use cases.</p>
+            <p><strong>Future Work:</strong></p>
+            <ul>
+                <li>Expand the DSL with more advanced primitives for planning and negotiation.</li>
+                <li>Integrate with a wider range of data sources and agent types.</li>
+                <li>Develop a more advanced UI for visual workflow creation and real-time monitoring.</li>
+>>>>>>> 991a3f2aa6b8740728fa6d7810245343aa0e47f8
             </ul>
         </section>
         <section id="slide-9">
             <h2>Q&A</h2>
+<<<<<<< HEAD
             <p>Thank you for your attention. Any questions?</p>
+=======
+            <p>Thank you for your attention. We are now open for questions.</p>
+>>>>>>> 991a3f2aa6b8740728fa6d7810245343aa0e47f8
         </section>
     </main>
     <footer>
