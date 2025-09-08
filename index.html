@@ -12,24 +12,53 @@
     </header>
     <main>
         <section id="slide-1">
-            <h2>Project Vision & Core Challenge</h2>
-            <p><strong>Vision:</strong> To create a highly efficient, scalable, and adaptive multi-agent system for real-time complex event processing.</p>
-            <p><strong>Challenge:</strong> Traditional systems struggle with dynamic, unpredictable events and lack a feedback loop for continuous adaptation.</p>
-        </section>
-        <section id="slide-2">
-            <h2>Our Solution: The Multi-Agent DSL Framework</h2>
-            <p>A specialized DSL that orchestrates multiple intelligent agents to collaboratively handle complex scenarios.</p>
-            <ul>
-                <li><strong>Declarative:</strong> Define "what" to do, not "how."</li>
-                <li><strong>Adaptive:</strong> Agents dynamically adjust to real-time events.</li>
-                <li><strong>Scalable:</strong> Built for high-throughput and low-latency.</li>
-            </ul>
-        </section>
+            <section id="vision">
+                <h2>Project Vision & Core Challenge</h2>
+                <p><strong>Vision:</strong> To create a highly efficient, scalable, and adaptive multi-agent system for real-time complex event processing.</p>
+                <p><strong>Challenge:</strong> Traditional systems struggle with dynamic, unpredictable events and lack a feedback loop for continuous adaptation.</p>
+            </section>
+
+            <section id="overview">
+                <h2>Project Overview</h2>
+                <p>
+                    随着大语言模型（LLMs）在 多智能体系统 中的广泛应用，任务often需要多轮推理、结构化输出以及智能体间的协同决策。然而，现有框架普遍缺乏一套能够显式支持 任务分解、智能体通信与运行时优化 的领域特定语言（DSL）。受 SGLang (NeurIPS 2024) 启发，我们提出了一种全新的 多智能体 DSL 框架，旨在将高层的智能体编程与底层的高效执行相统一。
+                </p>
+                <p>
+                    本工作弥合了 面向智能体的编程语言 与 高效运行时执行 之间的鸿沟，为多智能体协作、结构化生成以及人工智能系统工程提供了一个可复现、可扩展的研究平台。
+                </p>
+            </section>
+
+            <section id="innovations">
+                <h2>Core Innovations</h2>
+                <ul class="innovations-list">
+                    <li><strong>DSL 扩展:</strong> 支持 <code>spawn</code>, <code>route</code>, <code>gather</code>, <code>with_sla</code>, <code>contract</code>, <code>blackboard</code>, <code>on</code>, <code>emit</code> 等原语，显式建模任务分解、路由、约束与协作。</li>
+                    <li><strong>运行时优化:</strong>
+                        <ul>
+                            <li><strong>RadixTrie 前缀缓存:</strong> 跨任务前缀复用，大幅降低重复推理。</li>
+                            <li><strong>Cache-aware 调度:</strong> 长前缀优先，提升吞吐与响应速度。</li>
+                        </ul>
+                    </li>
+                    <li><strong>结构化约束:</strong> 支持 Regex / 轻量 cFSM 校验，保证输出符合格式要求。</li>
+                    <li><strong>事件驱动:</strong> 内置 EventBus，支持多智能体异步通信。</li>
+                    <li><strong>实验可复现:</strong> 集成 示例 / 实验 / 单元测试 / A/B 对比 / CLI 工具，零依赖即可运行。</li>
+                </ul>
+            </section>
+
+            <section id="solution">
+                <h2>Our Solution: The Multi-Agent DSL Framework</h2>
+                <p>A specialized DSL that orchestrates multiple intelligent agents to collaboratively handle complex scenarios.</p>
+                <ul>
+                    <li><strong>Declarative:</strong> Define "what" to do, not "how."</li>
+                    <li><strong>Adaptive:</strong> Agents dynamically adjust to real-time events.</li>
+                    <li><strong>Scalable:</strong> Built for high-throughput and low-latency.</li>
+                </ul>
+            </section>
         <section id="slide-3">
-            <h2>System Architecture</h2>
-            <p>A modular, decoupled architecture ensuring scalability and maintainability.</p>
-            <img src="results/system_architecture.png" alt="System Architecture Diagram">
-        </section>
+            <section id="system-architecture">
+                <h2>System Architecture</h2>
+                <p>A modular, decoupled architecture ensuring scalability and maintainability.</p>
+                <img src="results/ad_compare/system_architecture.png" alt="System Architecture Diagram" style="width:100%; max-width:800px;">
+            </section>
         <section id="slide-4">
             <h2>The DSL Primitives: Building Blocks of Intelligence</h2>
             <p>Our DSL is built on a few key primitives that enable powerful, declarative workflows.</p>

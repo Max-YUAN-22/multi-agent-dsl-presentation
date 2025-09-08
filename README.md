@@ -1,83 +1,244 @@
-🌆 SmartCity-MA: Multi-Agent DSL for Urban Intelligence 
-本项目基于 Multi-Agent DSL (SGLang-Inspired)  框架，聚焦 智慧城市场景 ，通过 多智能体协作 + 事件驱动调度 ，实现 实时城市级任务管控  与 可视化追踪 。 
-目标是为 科研展示、课程项目、顶会论文补充实验  提供一个 可复现、可扩展、具备学术深度  的系统。 
+# Multi-Agent DSL Framework
 
-✨ 1. 研究动机 
-现代城市治理需要处理复杂且动态的任务流： 
-环境监测 （空气质量 / 温湿度 / 水质） 
-公共安全 （跌倒检测 / 火灾预警 / 交通事故） 
-应急调度 （EMS、消防、交通管制） 
-传统系统往往是 点状解决 ，缺乏 统一建模 & 高效调度 。 
-本项目提出： 
-基于 DSL 的城市级多智能体编排  → 在语言层面表达协作，在运行时层面优化执行。 
+This project introduces a novel framework using a Domain-Specific Language (DSL) to orchestrate multiple intelligent agents for complex, real-time event processing. The system is demonstrated through two key use cases: Smart City management and Autonomous Driving coordination.
 
-🔑 2. 核心创新 
-城市级 DSL 原语 
-monitor(env) ：订阅环境传感器 
-detect(event) ：触发事件识别（火灾/事故/异常） 
-dispatch(agent) ：分配城市应急资源 
-feedback(channel) ：自动同步至城市管理后台 
-事件驱动运行时 
-基于 EventBus → 支持百万级事件流处理 
-内置 Cache-aware 调度 → 优先长前缀任务，减少延迟 
-智能反馈闭环 
-任务触发 → 调度执行 → 自动反馈 → 状态可视化 
-支持 决策透明性 （可解释日志 + 因果链路） 
+## Core Value & Innovation
 
-🏙️ 3. 应用案例（智慧城市场景库） 
-跌倒检测 → EMS 调度 
-摄像头检测 → 系统确认 → 派遣救护车 → 同步管理后台 
-火灾预警 → 消防派遣 
-传感器异常上报 → 任务流生成 → 消防资源调度 
-空气质量异常 → 环保响应 
-PM2.5 超标 → 触发报告生成 → 通知环保局 → 启动喷雾系统 
-⚡ 每个案例都可通过 前端可视化界面  动态展示执行流程。 
+The core problem this project addresses is how to efficiently and intelligently handle complex, dynamic, and high-concurrency real-world events. The innovative solution is a multi-agent system built upon a Domain-Specific Language (DSL).
 
-🚀 4. 快速运行 
-启动后端 
-cd backend 
-uvicorn http_api:app --reload --port 8000 
+- **DSL (Domain-Specific Language)**: Allows for the definition of complex business logic and workflows in a clear, declarative manner. This abstraction simplifies the development and maintenance of the system, making it easier to modify and extend. The DSL is designed to be intuitive and expressive, enabling domain experts to define complex behaviors without deep programming knowledge.
 
-启动前端 
-cd frontend 
-npm install 
-npm run dev 
+- **Multi-Agent Architecture**: Decomposes complex tasks into specialized, independent agents that work collaboratively, achieving high modularity, scalability, and robustness. Each agent is a self-contained unit with a specific role, such as monitoring traffic, managing incidents, or ensuring safety. This separation of concerns makes the system more resilient to failures and easier to debug.
 
-示例调用 
-curl -X POST http://localhost:8000/dispatch-event \ 
-  -H 'Content-Type: application/json' \ 
-  -d '{"event":"fire_alert","location":"building_A"}' 
+- **Real-time Feedback Loop**: Through WebSockets and a frontend UI, the system not only executes tasks but also monitors and visualizes the entire process in real-time, forming a complete "sense-decide-act-feedback" loop. This provides immediate insights into the system's state and performance, enabling rapid response to changing conditions.
+
+## Practical Applications
+
+The framework's ability to manage complex, real-time scenarios makes it suitable for a wide range of applications:
+
+- **Smart City Management**:
+    - **Traffic Optimization**: Dynamically adjust traffic signals and reroute vehicles based on real-time traffic conditions to reduce congestion.
+    - **Public Safety**: Coordinate emergency services (police, fire, ambulance) in response to incidents.
+    - **Resource Management**: Optimize the allocation of public resources, such as sanitation services and public transportation.
+
+- **Autonomous Vehicle Coordination**:
+    - **Fleet Management**: Coordinate the movements of a fleet of autonomous vehicles to optimize delivery routes and schedules.
+    - **Collision Avoidance**: Enable vehicles to communicate and collaborate to avoid collisions in complex traffic situations.
+    - **Ride-Sharing Services**: Dynamically match passengers with autonomous vehicles to provide efficient and convenient transportation.
+
+- **Dynamic Resource Allocation**:
+    - **Energy Grids**: Manage the distribution of energy in a smart grid to balance supply and demand.
+    - **Supply Chain Logistics**: Optimize the flow of goods in a supply chain by dynamically rerouting shipments in response to disruptions.
+    - **Cloud Computing**: Allocate computing resources in a data center to meet the demands of various applications.
+
+## Running Experiments Locally
+
+To run the experiments and see the system in action on your local machine, follow these steps:
+
+### 1. Prerequisites
+
+- **Node.js and npm**: Required for running the frontend.
+- **Python 3.8+**: Required for running the backend and simulation scripts.
+
+### 2. Installation
+
+Clone the repository and install the required dependencies:
+
+```bash
+git clone https://github.com/your-username/multi-agent-dsl-final.git
+cd multi-agent-dsl-final
+
+# Install backend dependencies
+pip install -r requirements.txt
+
+# Install frontend dependencies
+cd frontend
+npm install
+cd ..
+```
+
+### 3. Running the System
+
+You will need to run the backend and frontend servers in separate terminals.
+
+**Terminal 1: Start the Backend**
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+This will start the backend server on `http://localhost:8000`.
+
+**Terminal 2: Start the Frontend**
+
+```bash
+cd frontend
+npm start
+```
+
+This will start the frontend development server and open the application in your default browser at `http://localhost:3000`.
+
+### 4. Running an Experiment
+
+Once the backend and frontend are running, you can run an experiment by sending events to the system.
+
+**Terminal 3: Send Events**
+
+You can use the `scripts/send_events.py` script to send events to the backend. Here are a few examples:
+
+- **Send a traffic incident event:**
+  ```bash
+  python scripts/send_events.py --file traffic_incident_event.csv --api http://localhost:8000/events/traffic_incident
+  ```
+
+- **Trigger a weather alert:**
+  ```bash
+  python scripts/send_events.py --file weather_alert_event.csv --api http://localhost:8000/events/weather_alert
+  ```
+
+This script will read events from the specified CSV file and send them to the backend API. You can observe the system's response in real-time on the frontend.
+
+## System Architecture & Key Components
+
+The system is comprised of four key components:
+
+1.  **Backend**: The brain and central nervous system of the system.
+    -   **Technology**: Python, FastAPI, Uvicorn
+    -   **Functionality**:
+        -   **Event Ingestion**: The backend exposes a set of RESTful API endpoints (defined in `backend/api_routes.py`) for ingesting external events. Each event type has a dedicated endpoint (e.g., `/events/traffic_incident`, `/events/weather_alert`).
+        -   **DSL Parsing and Execution**: Upon receiving an event, the backend triggers a corresponding DSL workflow (defined in `backend/dsl_workflows.py`). The DSL parser interprets the workflow and orchestrates the execution of tasks by the agent team.
+        -   **Agent Management**: The backend manages the lifecycle of the agents, including their creation, scheduling, and communication. It uses a dependency injection system (see `backend/dependencies.py`) to provide agent instances to the API routes.
+        -   **State Management**: The backend maintains the global state of the system, including the status of all agents and events.
+        -   **Real-time Communication**: The backend uses a WebSocket manager (defined in `backend/websocket_manager.py`) to broadcast system status and results in real-time to the frontend, ensuring that the UI is always up-to-date. The main WebSocket endpoint is defined in `backend/main.py`.
+
+2.  **Frontend**: The face and interactive window of the system.
+    -   **Technology**: React, JavaScript
+    -   **Functionality**:
+        -   **Interactive Visualization**: Provides a map-based interface to visualize the system's state.
+        -   **User Interaction**: Allows users to manually trigger events.
+        -   **Real-time Updates**: Receives WebSocket messages to update the UI in real-time.
+
+3.  **Agents**: The hands and feet of the system; the executors of specific tasks.
+    -   **Technology**: Python
+    -   **Functionality**: Each agent has a clear responsibility and expertise. The agents are defined in the `agents/` directory.
+
+4.  **DSL (Domain-Specific Language)**: The "script" or "battle plan" of the system.
+    -   **Technology**: Custom scripts based on Python, with the core logic in `dsl/dsl.py`.
+    -   **Functionality**: Defines how the system should respond to different events.
+
+### Agent Interaction Model
+
+Agents in the system are designed to be autonomous and collaborative. They interact with each other through a combination of direct communication and shared state.
+
+- **Event Bus**: The primary mechanism for inter-agent communication is the event bus. Agents can publish events to the bus and subscribe to events that are relevant to them. This allows for a loosely coupled architecture where agents can interact without having direct knowledge of each other.
+
+- **Shared State**: Agents can also share information through a shared state mechanism, which is managed by the backend. This allows agents to access a consistent view of the system's state and coordinate their actions accordingly.
+
+- **DSL-Orchestrated Collaboration**: The DSL plays a crucial role in orchestrating the collaboration between agents. A DSL script can define a workflow that involves multiple agents, specifying the sequence of tasks and the dependencies between them. For example, the `traffic_incident_workflow_task` in `backend/dsl_workflows.py` is triggered by the `/events/traffic_incident` API endpoint and orchestrates the `TrafficIncidentAgent` and other agents to handle the incident.
+
+### DSL Primitives
+
+The DSL provides a set of primitives for defining agent workflows. Here are the core primitives and how to use them:
+
+- **`gen(name, prompt, agent)`**: This primitive is used to generate a new task for an agent.
+    - `name`: A unique name for the task.
+    - `prompt`: The prompt or instruction for the agent.
+    - `agent`: The name of the agent that should execute the task.
+
+    **Example:**
+    ```python
+    dsl.gen("task1", prompt="Analyze traffic data", agent="TrafficManagerAgent").schedule()
+    ```
+
+- **`join(tasks, mode)`**: This primitive is used to wait for a set of tasks to complete.
+    - `tasks`: A list of tasks to wait for.
+    - `mode`: The waiting mode. Can be "all" (wait for all tasks to complete) or "any" (wait for any one task to complete).
+
+    **Example:**
+    ```python
+    task1 = dsl.gen("task1", prompt="Task 1", agent="Agent1").schedule()
+    task2 = dsl.gen("task2", prompt="Task 2", agent="Agent2").schedule()
+    results = dsl.join([task1, task2], mode="all")
+    ```
+
+- **`on(topic, fn)`**: This primitive is used to subscribe a function to an event topic.
+    - `topic`: The name of the event topic.
+    - `fn`: The function to be called when an event is published to the topic.
+
+    **Example:**
+    ```python
+    def handle_traffic_incident(event):
+        print(f"Handling traffic incident: {event}")
+
+    dsl.on("traffic.incident", handle_traffic_incident)
+    ```
+
+- **`emit(topic, payload)`**: This primitive is used to publish an event to a topic.
+    - `topic`: The name of the event topic.
+    - `payload`: The data to be sent with the event.
+
+    **Example:**
+    ```python
+    dsl.emit("traffic.incident", {"location": "Main St", "severity": "high"})
+    ```
+
+### Agent Interaction in Experiments
+
+In the provided experiments, the agents interact in the following ways:
+
+**Autonomous Driving Scenario:**
+
+1.  A `TrafficIncidentAgent` detects a traffic incident via the `/events/traffic_incident` endpoint.
+2.  The `traffic_incident_workflow_task` DSL workflow is triggered.
+3.  The workflow uses `dsl.gen` to create tasks for various agents, such as the `RerouteAgent` and `SafetyAgent`.
+4.  These agents perform their tasks (e.g., calculating a new route, alerting nearby vehicles).
+5.  The results are collected using `dsl.join` and broadcast to the frontend via WebSockets.
+
+**Smart City Scenario:**
+
+1.  A `Perception311Agent` detects a sanitation issue (e.g., an overflowing trash can) and sends it to an endpoint like `/dispatch-event`.
+2.  The corresponding DSL workflow (e.g., `fire_alert_workflow_task`) is triggered.
+3.  The workflow schedules a `SanitationAgent` to address the issue.
+4.  The `SanitationAgent` coordinates with a sanitation crew.
+5.  Once the issue is resolved, the `SanitationAgent` emits a "sanitation.resolved" event, which is broadcast to the frontend.
+
+## Experiment Results
+
+The following images showcase the performance of the system in two different scenarios: Autonomous Driving and Smart City.
+
+### Autonomous Driving Scenario
+
+#### Latency
+![Latency Histogram](results/demo_ad/latency_hist.png)
+*This histogram shows the distribution of end-to-end latency for processing events in the autonomous driving scenario. The majority of events are processed with very low latency, demonstrating the system's real-time capabilities.*
+
+#### Throughput
+![Throughput](results/demo_ad/throughput.png)
+*This chart illustrates the system's throughput, measured in events per second. The sustained high throughput indicates that the system can handle a large volume of events without performance degradation.*
+
+#### Cache Hit Rate
+![Cache Hit Rate](results/demo_ad/cache_hit_ma.png)
+*This chart shows the cache hit rate of the system. A high cache hit rate signifies that the system is efficiently reusing previously computed results, which reduces latency and improves overall performance.*
+
+### Smart City Scenario
+
+#### Latency
+![Latency Histogram](results/demo_city/latency_hist.png)
+*This histogram shows the distribution of end-to-end latency for processing events in the smart city scenario. Similar to the autonomous driving scenario, the system maintains low latency across a wide range of events.*
+
+#### Throughput
+![Throughput](results/demo_city/throughput.png)
+*This chart illustrates the system's throughput in the smart city scenario. The system demonstrates robust performance, capable of handling the high event volume typical of a smart city environment.*
+
+#### Cache Hit Rate
+![Cache Hit Rate](results/demo_city/cache_hit_ma.png)
+*This chart shows the cache hit rate in the smart city scenario. The high cache hit rate indicates effective caching strategies, which are crucial for maintaining performance in a complex and dynamic environment.*
 
 
-📊 5. 实验与评估 
-吞吐量提升 ：在高并发（>10k 事件/s）下，缓存优化可提升 62% 吞吐量 
-延迟降低 ：平均延迟下降 40% ，99% 分位下降近 55% 
-稳定性验证 ：多事件流并发情况下，调度命中率 70%+ 
-📈 已内置脚本生成： 
-吞吐量对比曲线 
-延迟分布直方图 
-调度命中率趋势图 
+## Final Checklist
 
-📦 6. 项目结构 
-SmartCity-MA/ 
-├── backend/          # FastAPI 后端服务 
-├── frontend/         # React 可视化界面 
-├── dsl/              # 城市任务 DSL 定义 
-├── agents/           # 智能体实现 (EMS, Fire, EnvMonitor) 
-├── experiments/      # 智慧城市场景实验 
-├── results/          # 实验结果与图表 
-└── README.md 
-
-
-🔧 7. 配置说明 
-API Key ：支持 DEEPSEEK_API_KEY （真实 LLM 接入），无 Key 使用 mock 模式 
-可视化 ：WebSocket 实时接收事件流，动态绘制任务流图 
-扩展性 ：研究者可新增 Agent  和 TaskFlow ，快速构建新的城市应用场景 
-
-📚 8. 背景与引用 
-SGLang: Efficient Execution of Structured Generation Programs with LLMs , NeurIPS 2024 
-本项目创新点 ：首次将 DSL + 多智能体协作  扩展至 智慧城市场景 ，实现 科研可复现 + 演示可视化 。 
-
-👤 作者 
-Max-YUAN-22 
-SmartCity-MA: DSL-Powered Multi-Agent Framework for Urban Intelligence 
+-   **Services are running**: Confirm that the backend `uvicorn` service and the frontend `npm` service are both running.
+-   **Page is open**: Have the frontend UI page ready in a browser.
+-   **Presentation is ready**: Open the presentation with the charts and commentary.
+-   **Terminal is on standby**: Prepare a terminal window to quickly run the `send_events.py` script if needed.
+-   **Network connection**: Ensure a stable local network connection so that the WebSocket connection is not interrupted.
